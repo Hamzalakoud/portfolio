@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>AI Car Components Recognition — dashboard concept</title>
+    <link rel="stylesheet" href="board.css" />
+    <style>
+      body {
+        background: radial-gradient(1600px 1000px at 50% 20%, #1d232c, #050608 75%);
+      }
+      .window {
+        left: 120px;
+        top: 140px;
+        width: 2160px;
+        height: 1250px;
+        display: grid;
+        grid-template-columns: 330px 1fr 620px;
+        overflow: hidden;
+      }
+      .side {
+        padding: 56px 40px;
+        border-right: 1.5px solid rgb(255 255 255 / 0.08);
+        display: grid;
+        align-content: start;
+        gap: 22px;
+        color: rgb(239 233 221 / 0.6);
+      }
+      .side .logo {
+        margin-bottom: 40px;
+        color: #efe9dd;
+      }
+      .side p {
+        margin: 0;
+        padding: 18px 22px;
+        border-radius: 16px;
+      }
+      .side p.on {
+        background: rgb(255 106 26 / 0.14);
+        color: #ff8a4a;
+      }
+      .main {
+        padding: 56px 56px;
+        display: grid;
+        grid-template-rows: auto auto 1fr;
+        gap: 36px;
+      }
+      .main header {
+        display: flex;
+        justify-content: space-between;
+        align-items: end;
+      }
+      .main h1 {
+        margin: 0;
+        font-size: 92px;
+        font-variation-settings: "wdth" 75;
+        font-weight: 800;
+        line-height: 0.85;
+        text-transform: uppercase;
+      }
+      .main header .mono {
+        color: rgb(239 233 221 / 0.55);
+      }
+      .shot {
+        position: relative;
+        height: 470px;
+        border-radius: 22px;
+        overflow: hidden;
+        background: #0a0c10 url("../../src/assets/projects/cars-cover.jpg") 50% 70% / 118% auto no-repeat;
+      }
+      .shot i {
+        position: absolute;
+        border: 3px solid #ff6a1a;
+        border-radius: 6px;
+        background: rgb(255 106 26 / 0.08);
+      }
+      .shot i::after {
+        content: attr(data-l);
+        position: absolute;
+        left: -3px;
+        bottom: 100%;
+        margin-bottom: 6px;
+        padding: 4px 10px;
+        border-radius: 4px;
+        background: #ff6a1a;
+        color: #120804;
+        font: 500 16px "Geist Mono", monospace;
+        letter-spacing: 0.08em;
+        white-space: nowrap;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 30px;
+      }
+      th {
+        text-align: left;
+        padding: 0 0 16px;
+        font: 400 19px "Geist Mono", monospace;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: rgb(239 233 221 / 0.5);
+      }
+      td {
+        padding: 20px 0;
+        border-top: 1.5px solid rgb(255 255 255 / 0.08);
+      }
+      td.bar-cell {
+        width: 46%;
+      }
+      td .bar {
+        height: 12px;
+      }
+      td .bar b {
+        background: linear-gradient(90deg, #ff6a1a, #ffb27a);
+      }
+      .chat {
+        border-left: 1.5px solid rgb(255 255 255 / 0.08);
+        padding: 56px 44px;
+        display: grid;
+        grid-template-rows: auto 1fr auto;
+        gap: 30px;
+        background: rgb(0 0 0 / 0.18);
+      }
+      .chat h2 {
+        margin: 0;
+        color: rgb(239 233 221 / 0.6);
+      }
+      .msgs {
+        display: grid;
+        align-content: start;
+        gap: 22px;
+      }
+      .msg {
+        max-width: 86%;
+        padding: 22px 28px;
+        border-radius: 28px 28px 28px 8px;
+        background: rgb(255 255 255 / 0.07);
+        font-size: 29px;
+        line-height: 1.32;
+      }
+      .msg.me {
+        justify-self: end;
+        border-radius: 28px 28px 8px 28px;
+        background: #ff6a1a;
+        color: #140803;
+      }
+      .input {
+        padding: 24px 28px;
+        border-radius: 99px;
+        box-shadow: inset 0 0 0 2px rgb(255 255 255 / 0.12);
+        color: rgb(239 233 221 / 0.4);
+        font-size: 27px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="board">
+      <div class="panel window">
+        <nav class="side mono">
+          <p class="logo">● Component scanner</p>
+          <p class="on">Scan results</p>
+          <p>Components</p>
+          <p>Chatbot</p>
+          <p>Settings</p>
+        </nav>
+        <section class="main">
+          <header>
+            <h1>Scan results</h1>
+            <p class="mono">Concept · illustrative values</p>
+          </header>
+          <div class="shot">
+            <i data-l="Wheel" style="left: 20.5%; top: 56%; width: 11.8%; height: 27.6%"></i>
+            <i data-l="Wheel" style="left: 65.8%; top: 56%; width: 11.7%; height: 27.6%"></i>
+            <i data-l="Mirror" style="left: 60.6%; top: 37.9%; width: 4.4%; height: 6.4%"></i>
+            <i data-l="Headlight" style="left: 79%; top: 49.6%; width: 6.2%; height: 7.2%"></i>
+            <i data-l="Door" style="left: 49.7%; top: 43%; width: 12.9%; height: 26.4%"></i>
+          </div>
+          <table>
+            <thead>
+              <tr>
+                <th>Component</th>
+                <th>Class</th>
+                <th>Confidence · illustrative</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>Wheel</td><td class="mono">Exterior</td><td class="bar-cell"><div class="bar"><b style="width: 92%"></b></div></td></tr>
+              <tr><td>Headlight</td><td class="mono">Lighting</td><td class="bar-cell"><div class="bar"><b style="width: 84%"></b></div></td></tr>
+              <tr><td>Side mirror</td><td class="mono">Exterior</td><td class="bar-cell"><div class="bar"><b style="width: 71%"></b></div></td></tr>
+              <tr><td>Door</td><td class="mono">Body</td><td class="bar-cell"><div class="bar"><b style="width: 78%"></b></div></td></tr>
+            </tbody>
+          </table>
+        </section>
+        <aside class="chat">
+          <h2 class="mono">Chatbot</h2>
+          <div class="msgs">
+            <p class="msg">Ask me about this scan.</p>
+            <p class="msg me">Which components did it find?</p>
+            <p class="msg">Two wheels, a headlight, a side mirror and a door.</p>
+            <p class="msg me">Show the headlight.</p>
+          </div>
+          <p class="input">Ask about this scan…</p>
+        </aside>
+      </div>
+      <div class="grain"></div>
+      <p class="tag tag--tl mono"><i></i>Car components recognition — dashboard concept</p>
+      <p class="tag tag--tr mono">Concept · illustrative values</p>
+    </div>
+  </body>
+</html>
