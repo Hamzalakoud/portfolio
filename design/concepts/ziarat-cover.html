@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>zIArat — concept cover</title>
+    <link rel="stylesheet" href="board.css" />
+    <style>
+      body {
+        background: #060a18;
+      }
+    </style>
+  </head>
+  <body>
+    <!--
+      zIArat — concept cover. A Tunisian horseshoe arch with alternating voussoirs,
+      a Sidi Bou Said blue door studded in the traditional way, and an amphora on
+      a plinth in the light. The home page draws its recognition overlay over the
+      amphora, whose box is 1060–1340 × 500–1130 in this 2400×1500 frame.
+    -->
+    <div class="board">
+      <svg id="art" viewBox="0 0 2400 1500" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="wall" cx="50%" cy="38%" r="75%">
+            <stop offset="0" stop-color="#18264f" />
+            <stop offset=".55" stop-color="#0b1430" />
+            <stop offset="1" stop-color="#04060e" />
+          </radialGradient>
+          <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+            <stop offset="0" stop-color="#ffb070" stop-opacity=".55" />
+            <stop offset=".45" stop-color="#ff8a4a" stop-opacity=".18" />
+            <stop offset="1" stop-color="#ff8a4a" stop-opacity="0" />
+          </radialGradient>
+          <linearGradient id="door" x1="0" y1="0" x2=".35" y2="1">
+            <stop offset="0" stop-color="#3a74ff" />
+            <stop offset=".5" stop-color="#1f56d8" />
+            <stop offset="1" stop-color="#0f2f86" />
+          </linearGradient>
+          <linearGradient id="doorShade" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="#000" stop-opacity=".35" />
+            <stop offset=".5" stop-color="#000" stop-opacity="0" />
+            <stop offset="1" stop-color="#000" stop-opacity=".45" />
+          </linearGradient>
+          <radialGradient id="clay" cx="36%" cy="30%" r="80%">
+            <stop offset="0" stop-color="#f3ae7c" />
+            <stop offset=".35" stop-color="#c8643c" />
+            <stop offset=".75" stop-color="#7a2f18" />
+            <stop offset="1" stop-color="#3a140a" />
+          </radialGradient>
+          <linearGradient id="stone" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="#e9dfcc" />
+            <stop offset=".6" stop-color="#b9ab92" />
+            <stop offset="1" stop-color="#6e6452" />
+          </linearGradient>
+          <linearGradient id="floorFade" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#060a18" stop-opacity=".1" />
+            <stop offset="1" stop-color="#060a18" stop-opacity=".92" />
+          </linearGradient>
+          <linearGradient id="ray" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#ffd9b0" stop-opacity=".16" />
+            <stop offset="1" stop-color="#ffd9b0" stop-opacity="0" />
+          </linearGradient>
+          <clipPath id="doorClip">
+            <path d="M880 1340 L880 756 A340 340 0 1 1 1520 756 L1520 1340 Z" />
+          </clipPath>
+          <pattern id="tiles" width="96" height="96" patternUnits="userSpaceOnUse">
+            <rect width="96" height="96" fill="#0d1a3d" />
+            <rect x="20" y="20" width="56" height="56" fill="#1f56d8" />
+            <rect x="20" y="20" width="56" height="56" fill="#e9dfcc" transform="rotate(45 48 48)" opacity=".92" />
+            <rect x="32" y="32" width="32" height="32" fill="#c8643c" />
+            <rect x="38" y="38" width="20" height="20" fill="#0d1a3d" transform="rotate(45 48 48)" />
+            <circle cx="0" cy="0" r="9" fill="#e9b45a" />
+            <circle cx="96" cy="0" r="9" fill="#e9b45a" />
+            <circle cx="0" cy="96" r="9" fill="#e9b45a" />
+            <circle cx="96" cy="96" r="9" fill="#e9b45a" />
+          </pattern>
+        </defs>
+
+        <rect width="2400" height="1500" fill="url(#wall)" />
+        <polygon points="0,0 520,0 1500,1500 760,1500" fill="url(#ray)" opacity=".55" />
+        <polygon points="0,140 260,0 1900,1500 1500,1500" fill="url(#ray)" opacity=".3" />
+
+        <!-- Floor: a band of zellige, fading into the dark. -->
+        <g transform="translate(0 1340)">
+          <rect width="2400" height="160" fill="url(#tiles)" />
+          <rect width="2400" height="160" fill="url(#floorFade)" />
+        </g>
+
+        <!-- The arch: outer frame, alternating voussoirs, inner reveal. -->
+        <g id="arch">
+          <path d="M760 1340 L760 800 A466 466 0 1 1 1640 800 L1640 1340" fill="none" stroke="#efe6d6" stroke-opacity=".35" stroke-width="3" />
+          <path d="M796 1340 L796 787 A430 430 0 1 1 1604 787 L1604 1340 L1548 1340 L1548 767 A370 370 0 1 0 852 767 L852 1340 Z" fill="#e9e0cf" />
+          <g id="voussoirs"></g>
+          <path d="M796 1340 L796 787 A430 430 0 1 1 1604 787 L1604 1340" fill="none" stroke="#fff6e6" stroke-width="5" />
+          <path d="M852 1340 L852 767 A370 370 0 1 1 1548 767 L1548 1340" fill="none" stroke="#3b2a18" stroke-opacity=".5" stroke-width="3" />
+          <!-- Jambs in shadow on the right. -->
+          <rect x="1548" y="767" width="56" height="573" fill="#000" opacity=".28" />
+        </g>
+
+        <!-- The door, its studs, and the light falling on it. -->
+        <g clip-path="url(#doorClip)">
+          <rect x="860" y="380" width="680" height="980" fill="url(#door)" />
+          <rect x="860" y="380" width="680" height="980" fill="url(#doorShade)" />
+          <line x1="1200" y1="380" x2="1200" y2="1340" stroke="#0b2266" stroke-width="6" />
+          <g id="studs" fill="#0b0d14"></g>
+          <ellipse cx="1200" cy="800" rx="460" ry="560" fill="url(#glow)" />
+        </g>
+        <path d="M880 1340 L880 756 A340 340 0 1 1 1520 756 L1520 1340" fill="none" stroke="#0a1a4a" stroke-width="10" />
+
+        <!-- The amphora on its plinth. -->
+        <ellipse cx="1200" cy="1342" rx="230" ry="18" fill="#000" opacity=".5" />
+        <rect x="1052" y="1128" width="296" height="34" rx="4" fill="#efe4d0" />
+        <rect x="1072" y="1162" width="256" height="178" fill="url(#stone)" />
+        <rect x="1072" y="1162" width="256" height="14" fill="#000" opacity=".2" />
+
+        <g id="amphora">
+          <path d="M1173 548 C1110 538 1092 588 1104 676" fill="none" stroke="#8a3a1e" stroke-width="20" stroke-linecap="round" />
+          <path d="M1227 548 C1290 538 1308 588 1296 676" fill="none" stroke="#5e2510" stroke-width="20" stroke-linecap="round" />
+          <path
+            d="M1166 500 L1234 500 L1234 522 L1226 527 L1226 622 C1294 636 1338 668 1340 716 C1343 846 1284 980 1230 1046 L1214 1110 L1200 1124 L1186 1110 L1170 1046 C1116 980 1057 846 1060 716 C1062 668 1106 636 1174 622 L1174 527 L1166 522 Z"
+            fill="url(#clay)"
+          />
+          <path d="M1074 716 C1150 734 1250 734 1326 716" fill="none" stroke="#3a140a" stroke-opacity=".55" stroke-width="5" />
+          <path d="M1080 750 C1150 768 1250 768 1320 750" fill="none" stroke="#3a140a" stroke-opacity=".4" stroke-width="3" />
+          <path d="M1112 690 C1120 820 1150 940 1186 1040" fill="none" stroke="#ffd2a8" stroke-opacity=".35" stroke-width="10" stroke-linecap="round" />
+          <path d="M1166 500 L1234 500" stroke="#f6c39a" stroke-width="4" />
+        </g>
+
+        <g id="dust" fill="#ffe7c8"></g>
+      </svg>
+      <div class="grain"></div>
+      <p class="tag tag--tl mono"><i></i>zIArat — concept artwork</p>
+      <p class="tag tag--tr mono">Concept artwork · not a screenshot</p>
+    </div>
+
+    <script>
+      const NS = "http://www.w3.org/2000/svg";
+      const add = (parent, tag, attrs) => {
+        const el = document.createElementNS(NS, tag);
+        for (const [k, v] of Object.entries(attrs)) el.setAttribute(k, v);
+        parent.appendChild(el);
+        return el;
+      };
+      const pt = (cx, cy, r, deg) => [cx + r * Math.cos((deg * Math.PI) / 180), cy - r * Math.sin((deg * Math.PI) / 180)];
+
+      // Ablaq voussoirs: alternating cream and terracotta wedges between r 370 and 430.
+      const v = document.getElementById("voussoirs");
+      const steps = 22;
+      for (let i = 0; i < steps; i++) {
+        const a0 = -20 + (220 / steps) * i;
+        const a1 = -20 + (220 / steps) * (i + 1);
+        const [x0, y0] = pt(1200, 640, 430, a0);
+        const [x1, y1] = pt(1200, 640, 430, a1);
+        const [x2, y2] = pt(1200, 640, 370, a1);
+        const [x3, y3] = pt(1200, 640, 370, a0);
+        add(v, "path", {
+          d: `M${x0} ${y0} A430 430 0 0 0 ${x1} ${y1} L${x2} ${y2} A370 370 0 0 1 ${x3} ${y3} Z`,
+          fill: i % 2 ? "#c8643c" : "#efe6d6",
+          stroke: "#2a1a10",
+          "stroke-opacity": ".35",
+          "stroke-width": "2",
+        });
+      }
+
+      // Studs: two arched rows, jamb rows, and rosettes on each leaf.
+      const s = document.getElementById("studs");
+      const stud = (x, y, r = 7) => {
+        add(s, "circle", { cx: x, cy: y, r });
+        add(s, "circle", { cx: x - r * 0.3, cy: y - r * 0.3, r: r * 0.35, fill: "#5a6a9a", opacity: ".8" });
+      };
+      for (const [r, n] of [
+        [305, 40],
+        [272, 34],
+      ]) {
+        for (let i = 0; i <= n; i++) {
+          const [x, y] = pt(1200, 640, r, -20 + (220 / n) * i);
+          stud(x, y);
+        }
+        const [xr, yr] = pt(1200, 640, r, -20);
+        const [xl] = pt(1200, 640, r, 200);
+        for (let y = yr + 30; y < 1320; y += 30) {
+          stud(xl, y);
+          stud(xr, y);
+        }
+      }
+      for (const cx of [1040, 1360]) {
+        for (const [r, n] of [
+          [74, 18],
+          [44, 12],
+        ]) {
+          for (let i = 0; i < n; i++) {
+            const [x, y] = pt(cx, 860, r, (360 / n) * i);
+            stud(x, y, 6);
+          }
+        }
+        stud(cx, 860, 9);
+        for (let i = -3; i <= 3; i++) {
+          stud(cx + i * 22, 1160 - (3 - Math.abs(i)) * 22, 6);
+          stud(cx + i * 22, 1160 + (3 - Math.abs(i)) * 22, 6);
+        }
+      }
+
+      // Dust in the light.
+      const d = document.getElementById("dust");
+      let seed = 7;
+      const rand = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
+      for (let i = 0; i < 140; i++) {
+        const a = rand() * Math.PI * 2;
+        const r = Math.sqrt(rand()) * 520;
+        add(d, "circle", { cx: 1200 + Math.cos(a) * r * 1.2, cy: 760 + Math.sin(a) * r * 0.9, r: (0.6 + rand() * 2.6).toFixed(2), opacity: (0.08 + rand() * 0.5).toFixed(2) });
+      }
+    </script>
+  </body>
+</html>

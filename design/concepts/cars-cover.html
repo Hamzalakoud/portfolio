@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>AI Car Components Recognition — concept cover</title>
+    <link rel="stylesheet" href="board.css" />
+  </head>
+  <body>
+    <!--
+      A car in profile in a dark studio. The home page draws detection boxes over
+      it, so the parts sit at fixed places in this 2400×1500 frame:
+      rear wheel 600–840 × 928–1168, front wheel 1520–1760 × 928–1168,
+      headlight 1790–1915 × 872–935, mirror 1415–1505 × 770–825, front door 1195–1455 × 815–1045.
+    -->
+    <div class="board">
+      <svg viewBox="0 0 2400 1500" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="spot" cx="50%" cy="22%" r="70%">
+            <stop offset="0" stop-color="#2b333f" />
+            <stop offset=".5" stop-color="#11151b" />
+            <stop offset="1" stop-color="#050608" />
+          </radialGradient>
+          <linearGradient id="floor" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#151a22" />
+            <stop offset="1" stop-color="#040506" />
+          </linearGradient>
+          <linearGradient id="body" x1="0" y1="690" x2="0" y2="1050" gradientUnits="userSpaceOnUse">
+            <stop offset="0" stop-color="#b9c2cd" />
+            <stop offset=".22" stop-color="#6b7581" />
+            <stop offset=".5" stop-color="#2b323b" />
+            <stop offset=".8" stop-color="#14181e" />
+            <stop offset="1" stop-color="#0a0c10" />
+          </linearGradient>
+          <linearGradient id="glass" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#2a3a4c" />
+            <stop offset=".5" stop-color="#0b1119" />
+            <stop offset="1" stop-color="#05070a" />
+          </linearGradient>
+          <radialGradient id="rim" cx="40%" cy="35%" r="70%">
+            <stop offset="0" stop-color="#2a2f37" />
+            <stop offset="1" stop-color="#0d0f13" />
+          </radialGradient>
+          <linearGradient id="fade" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#fff" stop-opacity=".22" />
+            <stop offset=".45" stop-color="#fff" stop-opacity="0" />
+          </linearGradient>
+          <mask id="reflectMask" maskUnits="userSpaceOnUse" x="0" y="1160" width="2400" height="340">
+            <rect x="0" y="1160" width="2400" height="340" fill="url(#fade)" />
+          </mask>
+          <filter id="blur18" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="18" /></filter>
+          <filter id="blur6" x="-20%" y="-200%" width="140%" height="500%"><feGaussianBlur stdDeviation="6" /></filter>
+          <clipPath id="floorClip"><rect x="0" y="1160" width="2400" height="340" /></clipPath>
+
+          <g id="wheel">
+            <circle r="112" fill="#0a0b0e" stroke="#1f232a" stroke-width="4" />
+            <circle r="86" fill="none" stroke="#15181d" stroke-width="10" />
+            <circle r="76" fill="url(#rim)" />
+            <g id="spokes" stroke="#b8c1cc" stroke-width="11" stroke-linecap="round"></g>
+            <path d="M 44 -46 A 64 64 0 0 1 62 -12" stroke="#ff6a1a" stroke-width="14" fill="none" stroke-linecap="round" />
+            <circle r="74" fill="none" stroke="#d7dde4" stroke-width="5" />
+            <circle r="20" fill="#8c949e" />
+            <circle r="7" fill="#2a2f37" />
+          </g>
+
+          <g id="car">
+            <path
+              id="shell"
+              d="M500 1030 C488 990 488 950 505 905 C520 870 600 850 720 840 C800 790 860 722 960 702 C1080 680 1250 680 1330 700 C1390 715 1440 780 1490 822 C1600 835 1760 850 1850 880 C1895 895 1912 940 1908 1000 C1906 1028 1890 1048 1860 1048 L1770 1048 A130 130 0 0 0 1510 1048 L850 1048 A130 130 0 0 0 590 1048 L540 1048 C515 1048 502 1042 500 1030 Z"
+              fill="url(#body)"
+            />
+            <path d="M905 728 C1000 708 1240 705 1312 716 C1352 726 1392 772 1428 812 L950 816 C925 790 908 760 905 728 Z" fill="url(#glass)" stroke="#c9d1db" stroke-opacity=".35" stroke-width="3" />
+            <path d="M960 724 C1030 712 1120 710 1170 711 L1110 812 L1010 813 Z" fill="#fff" opacity=".06" />
+            <rect x="1182" y="708" width="18" height="108" fill="#1a1f26" />
+            <path d="M560 905 C900 890 1500 895 1880 915" fill="none" stroke="#fff" stroke-opacity=".28" stroke-width="3" />
+            <path d="M610 872 C900 860 1400 860 1760 872" fill="none" stroke="#fff" stroke-opacity=".5" stroke-width="10" filter="url(#blur6)" />
+            <path d="M1192 818 L1194 1042 M1456 824 C1470 900 1474 980 1468 1042 M948 818 C936 900 928 980 902 1042" fill="none" stroke="#05070a" stroke-opacity=".8" stroke-width="3" />
+            <rect x="1386" y="866" width="52" height="10" rx="5" fill="#aab3bd" />
+            <rect x="1126" y="866" width="52" height="10" rx="5" fill="#aab3bd" />
+            <path d="M1425 795 C1450 778 1492 782 1498 806 C1492 818 1452 820 1428 812 Z" fill="#59636f" stroke="#c9d1db" stroke-opacity=".4" stroke-width="2" />
+            <path d="M1800 880 C1840 886 1880 896 1898 912 C1880 922 1830 920 1796 902 Z" fill="#eaf7ff" />
+            <path d="M498 912 C512 906 540 902 566 902 L562 922 C540 924 515 926 497 930 Z" fill="#ff2a3a" />
+            <use href="#wheel" x="720" y="1048" />
+            <use href="#wheel" x="1640" y="1048" />
+          </g>
+        </defs>
+
+        <rect width="2400" height="1500" fill="url(#spot)" />
+        <g stroke="#7fdcff" stroke-opacity=".05" stroke-width="2">
+          <line x1="300" y1="0" x2="300" y2="1160" />
+          <line x1="700" y1="0" x2="700" y2="1160" />
+          <line x1="1100" y1="0" x2="1100" y2="1160" />
+          <line x1="1500" y1="0" x2="1500" y2="1160" />
+          <line x1="1900" y1="0" x2="1900" y2="1160" />
+          <line x1="2300" y1="0" x2="2300" y2="1160" />
+        </g>
+
+        <rect y="1160" width="2400" height="340" fill="url(#floor)" />
+        <g id="grid" clip-path="url(#floorClip)" stroke="#2fd0ff" stroke-opacity=".13" stroke-width="2"></g>
+
+        <ellipse cx="1200" cy="1166" rx="760" ry="34" fill="#000" opacity=".8" filter="url(#blur18)" />
+        <g mask="url(#reflectMask)">
+          <use href="#car" transform="translate(0 2320) scale(1 -1)" />
+        </g>
+
+        <ellipse cx="1880" cy="912" rx="120" ry="40" fill="#bfe9ff" opacity=".5" filter="url(#blur18)" />
+        <ellipse cx="520" cy="916" rx="60" ry="26" fill="#ff2a3a" opacity=".6" filter="url(#blur18)" />
+        <use href="#car" />
+        <line x1="480" y1="1162" x2="1920" y2="1162" stroke="#ff6a1a" stroke-opacity=".55" stroke-width="2" />
+      </svg>
+      <div class="grain"></div>
+      <p class="tag tag--tl mono"><i></i>Car components recognition — concept artwork</p>
+      <p class="tag tag--tr mono">Concept artwork · illustrative</p>
+    </div>
+    <script>
+      const NS = "http://www.w3.org/2000/svg";
+      const spokes = document.getElementById("spokes");
+      for (let i = 0; i < 10; i++) {
+        const a = (i / 10) * Math.PI * 2;
+        const line = document.createElementNS(NS, "line");
+        line.setAttribute("x1", (Math.cos(a) * 22).toFixed(1));
+        line.setAttribute("y1", (Math.sin(a) * 22).toFixed(1));
+        line.setAttribute("x2", (Math.cos(a + 0.12) * 70).toFixed(1));
+        line.setAttribute("y2", (Math.sin(a + 0.12) * 70).toFixed(1));
+        spokes.appendChild(line);
+      }
+      // A floor grid in one-point perspective.
+      const grid = document.getElementById("grid");
+      const add = (x1, y1, x2, y2) => {
+        const l = document.createElementNS(NS, "line");
+        Object.entries({ x1, y1, x2, y2 }).forEach(([k, v]) => l.setAttribute(k, v));
+        grid.appendChild(l);
+      };
+      for (let k = 1; k < 14; k++) add(0, 1160 + Math.pow(k, 1.9) * 2.6, 2400, 1160 + Math.pow(k, 1.9) * 2.6);
+      for (let k = -18; k <= 18; k++) add(1200 + k * 40, 1160, 1200 + k * 260, 1500);
+    </script>
+  </body>
+</html>
