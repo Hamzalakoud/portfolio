@@ -1,0 +1,436 @@
+/* ═══ PROJECT SCENES ════════════════════════════════════════
+   Base rules describe a plain document: number, title, picture, facts.
+   That is what narrow screens and reduced-motion visitors get.
+   Wide screens with motion turn each project into a pinned stage. */
+
+.project {
+  position: relative;
+  padding: 16vh var(--gutter) 6vh;
+}
+
+.project__stage {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.project__num {
+  font-size: min(22vw, 30vh);
+  line-height: 0.78;
+  font-family: var(--outline);
+  font-variation-settings: normal;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--ink-3);
+}
+
+.project__title {
+  font-size: min(22vw, calc(88vw / (var(--chars) * 0.56)));
+}
+
+.project__media {
+  position: relative;
+  display: block;
+  margin-inline: calc(var(--gutter) * -1);
+  aspect-ratio: 4 / 3;
+  text-decoration: none;
+}
+
+.project__frame {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: #0d0c0b;
+}
+
+.project__fit {
+  position: absolute;
+  inset: 0;
+  will-change: transform;
+}
+
+.project__picture {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: var(--focus, 50% 50%);
+}
+
+.project__scrim {
+  display: none;
+}
+
+.project__caption {
+  position: absolute;
+  left: var(--gutter);
+  right: var(--gutter);
+  top: calc(100% + 0.7rem);
+  color: var(--ink-2);
+}
+
+.project__meta {
+  display: grid;
+  justify-items: start;
+  gap: 1.3rem;
+  margin-top: 3.2rem;
+}
+
+.project__flow {
+  color: var(--accent);
+}
+
+.project__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+}
+
+.project__facts {
+  display: grid;
+  gap: 0.35rem;
+  width: 100%;
+}
+
+.project__facts div {
+  display: grid;
+  grid-template-columns: 7.5rem 1fr;
+  gap: 1rem;
+}
+
+.project__facts dt {
+  color: var(--ink-3);
+}
+
+.project__summary {
+  max-width: 31em;
+  font-size: clamp(1.05rem, 1.28vw, 1.32rem);
+  line-height: 1.34;
+  text-wrap: pretty;
+}
+
+/* — Reduced motion on a wide screen: two calm columns. — */
+@media (min-width: 861px) {
+  html:not(.motion) .project__stage {
+    grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+    column-gap: var(--gutter);
+    align-items: start;
+  }
+
+  html:not(.motion) .project__num,
+  html:not(.motion) .project__title,
+  html:not(.motion) .project__meta {
+    grid-column: 1;
+  }
+
+  html:not(.motion) .project__title {
+    font-size: min(8vw, calc(38vw / (var(--chars) * 0.56)));
+  }
+
+  html:not(.motion) .project__media {
+    grid-area: 1 / 2 / span 3;
+    margin: 0;
+    aspect-ratio: 16 / 10;
+  }
+
+  html:not(.motion) .project__caption {
+    left: 0;
+    right: 0;
+  }
+}
+
+/* — The pinned stage. — */
+@media (min-width: 861px) {
+  .motion .project {
+    height: 250vh;
+    padding: 0;
+  }
+
+  .motion .project__stage {
+    --w: min(78vw, 124vh);
+    --h: calc(var(--w) * 0.625);
+    position: sticky;
+    top: 0;
+    display: block;
+    height: 100vh;
+    overflow: clip;
+    perspective: 1700px;
+  }
+
+  .motion .project__num {
+    position: absolute;
+    left: var(--gutter);
+    top: 10vh;
+  }
+
+  .motion .project--left .project__num {
+    left: auto;
+    right: var(--gutter);
+  }
+
+  /* The title is one layer below the picture: the picture grows over it. */
+  .motion .project__title {
+    position: absolute;
+    z-index: 1;
+    inset: 50% var(--gutter) auto;
+    translate: 0 -50%;
+    font-size: min(15.5vw, 27vh, calc(86vw / (var(--chars) * 0.56)));
+  }
+
+  .motion .project--left .project__title {
+    text-align: right;
+  }
+
+  .motion .project--rise .project__title {
+    text-align: center;
+  }
+
+  .motion .project__media {
+    position: absolute;
+    z-index: 2;
+    left: 50%;
+    top: 51%;
+    width: var(--w);
+    height: var(--h);
+    margin: 0;
+    aspect-ratio: auto;
+    translate: -50% -50%;
+    will-change: transform;
+  }
+
+  .motion .project__frame {
+    border-radius: 2px;
+  }
+
+  .motion .project__scrim {
+    display: block;
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(to top right, rgb(8 7 6 / 0.95) 0%, rgb(8 7 6 / 0.78) 30%, rgb(8 7 6 / 0) 64%);
+  }
+
+  .motion .project--left .project__scrim {
+    background: linear-gradient(to top left, rgb(8 7 6 / 0.95) 0%, rgb(8 7 6 / 0.78) 30%, rgb(8 7 6 / 0) 64%);
+  }
+
+  .motion .project__caption {
+    left: 0;
+    right: auto;
+    white-space: nowrap;
+  }
+
+  .motion .project--left .project__caption {
+    left: auto;
+    right: 0;
+  }
+
+  .motion .project__meta {
+    position: absolute;
+    z-index: 3;
+    left: calc(50% - var(--w) / 2 + 2.6vw);
+    bottom: calc(49% - var(--h) / 2 + 2.6vw);
+    width: min(31rem, 38vw);
+    margin: 0;
+    gap: 1rem;
+  }
+
+  .motion .project--left .project__meta {
+    left: auto;
+    right: calc(50% - var(--w) / 2 + 2.6vw);
+  }
+
+  .motion .project__facts dt {
+    color: var(--ink-2);
+  }
+}
+
+/* ═══ STAGE OVERLAYS — drawn in the pictures' own 2400×1500 space ═══ */
+.cv {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  font-family: var(--mono-family);
+  font-size: 26px;
+  letter-spacing: 0.08em;
+}
+
+.cv__box rect {
+  fill: rgb(255 255 255 / 0.04);
+  stroke: var(--stage, #efe9dd);
+  stroke-width: 2.5;
+  stroke-dasharray: 1;
+}
+
+.cv__box path {
+  fill: none;
+  stroke: #efe9dd;
+  stroke-width: 5;
+}
+
+.cv text {
+  fill: #efe9dd;
+}
+
+.project--ziarat {
+  --stage: #ffb070;
+}
+
+.project--cars {
+  --stage: #ff6a1a;
+}
+
+.project--swift {
+  --stage: #19c9a6;
+}
+
+.zi__scan rect {
+  fill: #ffd2a8;
+}
+
+.zi__scan .zi__trail {
+  fill: rgb(255 176 112 / 0.12);
+}
+
+.cars__scan {
+  fill: #ff8a4a;
+  filter: drop-shadow(0 0 18px #ff6a1a);
+}
+
+.cv--cars .cv__box rect {
+  fill: rgb(255 106 26 / 0.08);
+}
+
+.cv--cars .cv__box text {
+  fill: var(--stage);
+}
+
+.swift__pulse {
+  fill: none;
+  stroke: #eafff9;
+  stroke-width: 9;
+  stroke-linecap: round;
+  stroke-dasharray: 0.08 1.2;
+  stroke-dashoffset: 0.08;
+  filter: drop-shadow(0 0 12px #19c9a6);
+}
+
+.swift__ring {
+  fill: none;
+  stroke: var(--stage);
+  stroke-width: 3;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+
+.readout {
+  position: absolute;
+  right: 2.4vw;
+  bottom: 2.4vw;
+  width: min(30rem, 44%);
+  padding: 0.9rem 1.1rem;
+  background: rgb(7 8 12 / 0.93);
+  border: 1px solid rgb(239 233 221 / 0.2);
+  color: var(--ink);
+  text-transform: none;
+  letter-spacing: 0.02em;
+}
+
+.readout__row {
+  display: grid;
+  grid-template-columns: 2.4rem 6.5rem 1fr;
+  gap: 0.9rem;
+  padding: 0.42rem 0;
+  border-top: 1px solid rgb(239 233 221 / 0.12);
+}
+
+.readout__row > :first-child,
+.readout__soft {
+  color: var(--ink-2);
+}
+
+.readout__head {
+  grid-template-columns: 1fr auto;
+  border-top: 0;
+  color: var(--stage);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.readout__head > :first-child {
+  color: inherit;
+}
+
+.readout__bar {
+  grid-template-columns: 7.5rem 1fr;
+  align-items: center;
+}
+
+.readout__bar > span:last-child {
+  height: 6px;
+  border-radius: 99px;
+  background: rgb(255 255 255 / 0.1);
+  overflow: hidden;
+}
+
+.readout__bar b {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, var(--stage), #ffb27a);
+  transform-origin: 0 50%;
+}
+
+.readout__map {
+  grid-template-columns: 4rem 1.2rem 1fr;
+}
+
+.readout__map > :first-child {
+  color: #19c9a6;
+}
+
+.readout__map > :last-child {
+  color: #e6c27a;
+}
+
+.motion .project--left .readout {
+  right: auto;
+  left: 2.4vw;
+}
+
+@media (max-width: 860px) {
+  .cv {
+    font-size: 34px;
+  }
+
+  .readout {
+    right: 0.6rem;
+    bottom: 0.6rem;
+    width: calc(100% - 1.2rem);
+    padding: 0.5rem 0.7rem;
+    font-size: 0.5625rem;
+  }
+
+  .readout__row {
+    grid-template-columns: 1.6rem 4.6rem 1fr;
+    gap: 0.5rem;
+    padding: 0.26rem 0;
+  }
+
+  .readout__head {
+    grid-template-columns: 1fr auto;
+  }
+
+  .readout__bar {
+    grid-template-columns: 5.5rem 1fr;
+  }
+
+  .readout__map {
+    grid-template-columns: 3rem 1rem 1fr;
+  }
+
+  /* A phone frame is small: the read-out hides the zIArat artifact, so it goes. */
+  .project--ziarat .readout,
+  .project--cars .readout {
+    display: none;
+  }
+}

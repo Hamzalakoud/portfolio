@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>SWIFT MT-to-MX — schematic cover</title>
+    <link rel="stylesheet" href="board.css" />
+    <style>
+      body {
+        background: #050b1a;
+      }
+      .card {
+        position: absolute;
+        top: 330px;
+        padding: 44px 48px;
+        font-family: "Geist Mono", monospace;
+        font-size: 27px;
+        line-height: 1.72;
+        letter-spacing: 0.01em;
+        white-space: pre;
+        color: #dfe6f2;
+      }
+      .card h2 {
+        margin: 0 0 26px;
+        font-size: 21px;
+        font-weight: 500;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: #8ea3c7;
+        display: flex;
+        justify-content: space-between;
+        gap: 40px;
+      }
+      .card h2 b {
+        font-family: "Bricolage Grotesque", sans-serif;
+        font-variation-settings: "wdth" 75;
+        font-weight: 800;
+        font-size: 64px;
+        line-height: 0.8;
+        letter-spacing: -0.01em;
+        color: #efe9dd;
+      }
+      .mt {
+        top: 420px;
+        left: 200px;
+        width: 640px;
+      }
+      .mx {
+        top: 392px;
+        left: 1480px;
+        width: 760px;
+        font-size: 25px;
+      }
+      .k {
+        color: #19c9a6;
+      }
+      .v {
+        color: #e6c27a;
+      }
+      .d {
+        color: #5f7397;
+      }
+      .node {
+        position: absolute;
+        left: 1090px;
+        top: 530px;
+        width: 220px;
+        height: 220px;
+        border-radius: 50%;
+        display: grid;
+        place-items: center;
+        text-align: center;
+        background: radial-gradient(circle at 40% 35%, #1f3d7a, #0a1734 70%);
+        border: 2px solid rgb(25 201 166 / 0.6);
+        box-shadow:
+          0 0 0 18px rgb(25 201 166 / 0.06),
+          0 0 120px rgb(25 201 166 / 0.35);
+      }
+      .node span {
+        font-size: 19px;
+        line-height: 1.5;
+        color: #bfe9de;
+      }
+      .strip {
+        left: 200px;
+        right: 160px;
+        top: 1090px;
+        height: 230px;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+      }
+      .stage {
+        padding: 34px 40px;
+        border-left: 1.5px solid rgb(255 255 255 / 0.08);
+        display: grid;
+        gap: 18px;
+        align-content: start;
+      }
+      .stage:first-child {
+        border-left: 0;
+      }
+      .stage p {
+        margin: 0;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        color: #c9d4e8;
+      }
+      .stage p i {
+        width: 14px;
+        height: 14px;
+        border-radius: 50%;
+        background: #19c9a6;
+        box-shadow: 0 0 18px #19c9a6;
+      }
+      .stage svg {
+        width: 100%;
+        height: 90px;
+      }
+    </style>
+  </head>
+  <body>
+    <!--
+      Schematic only: generic field tags from the public MT and MX formats, with
+      placeholders instead of values. The home page traces a pulse along the two
+      flow paths (MT card → converter at 1200,640 → MX card).
+    -->
+    <div class="board">
+      <svg viewBox="0 0 2400 1500" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <radialGradient id="bg" cx="50%" cy="38%" r="75%">
+            <stop offset="0" stop-color="#0f2452" />
+            <stop offset=".6" stop-color="#071230" />
+            <stop offset="1" stop-color="#02050d" />
+          </radialGradient>
+          <linearGradient id="flow" x1="0" x2="1">
+            <stop offset="0" stop-color="#19c9a6" stop-opacity=".1" />
+            <stop offset=".5" stop-color="#19c9a6" />
+            <stop offset="1" stop-color="#e6c27a" stop-opacity=".8" />
+          </linearGradient>
+          <filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="8" /></filter>
+        </defs>
+        <rect width="2400" height="1500" fill="url(#bg)" />
+        <g id="net" fill="none" stroke="#6f8fd6" stroke-opacity=".12" stroke-width="2"></g>
+        <g id="nodes" fill="#8fb0ff"></g>
+        <path id="p1" d="M840 640 C940 600 1010 600 1090 640" fill="none" stroke="url(#flow)" stroke-width="4" />
+        <path id="p2" d="M1310 640 C1390 680 1430 680 1480 640" fill="none" stroke="url(#flow)" stroke-width="4" />
+        <g fill="#7ff5dc" filter="url(#glow)">
+          <circle cx="958" cy="612" r="10" />
+          <circle cx="1402" cy="668" r="10" />
+        </g>
+        <g fill="#eafff9">
+          <circle cx="958" cy="612" r="5" />
+          <circle cx="1402" cy="668" r="5" />
+        </g>
+      </svg>
+
+      <div class="card panel mt"><h2><span>Legacy format</span><b>MT</b></h2><span class="d">{4:</span>
+<span class="k">:20:</span><span class="v">REFERENCE</span>
+<span class="k">:32A:</span><span class="v">DATE/CCY/AMOUNT</span>
+<span class="k">:50K:</span><span class="v">ORDERING CUSTOMER</span>
+<span class="k">:59:</span><span class="v">BENEFICIARY</span>
+<span class="d">-}</span></div>
+
+      <div class="node"><span class="mono">Parse<br />→<br />Convert</span></div>
+
+      <div class="card panel mx"><h2><span>XML · ISO 20022</span><b>MX</b></h2><span class="d">&lt;Document&gt;</span>
+  <span class="k">&lt;PmtId&gt;&lt;InstrId&gt;</span><span class="v">REFERENCE</span><span class="k">&lt;/InstrId&gt;&lt;/PmtId&gt;</span>
+  <span class="k">&lt;IntrBkSttlmAmt</span> <span class="d">Ccy=</span><span class="v">"CCY"</span><span class="k">&gt;</span>
+    <span class="v">AMOUNT</span>
+  <span class="k">&lt;/IntrBkSttlmAmt&gt;</span>
+  <span class="k">&lt;Dbtr&gt;</span><span class="v">ORDERING CUSTOMER</span><span class="k">&lt;/Dbtr&gt;</span>
+  <span class="k">&lt;Cdtr&gt;</span><span class="v">BENEFICIARY</span><span class="k">&lt;/Cdtr&gt;</span>
+<span class="d">&lt;/Document&gt;</span></div>
+
+      <div class="panel strip mono">
+        <div class="stage"><p><i></i>Received</p><svg viewBox="0 0 400 90" preserveAspectRatio="none" data-seed="3"></svg></div>
+        <div class="stage"><p><i></i>Parsed</p><svg viewBox="0 0 400 90" preserveAspectRatio="none" data-seed="11"></svg></div>
+        <div class="stage"><p><i></i>Converted</p><svg viewBox="0 0 400 90" preserveAspectRatio="none" data-seed="19"></svg></div>
+        <div class="stage"><p><i></i>Supervised</p><svg viewBox="0 0 400 90" preserveAspectRatio="none" data-seed="29"></svg></div>
+      </div>
+
+      <div class="grain"></div>
+      <p class="tag tag--tl mono"><i></i>SWIFT MT → MX — schematic</p>
+      <p class="tag tag--tr mono">Generic format · no production data</p>
+    </div>
+    <script>
+      const NS = "http://www.w3.org/2000/svg";
+      let seed = 5;
+      const rand = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
+      // A network behind: long arcs between points, like routes on a globe.
+      const net = document.getElementById("net");
+      const nodes = document.getElementById("nodes");
+      const pts = Array.from({ length: 26 }, () => [rand() * 2400, 80 + rand() * 1000]);
+      for (const [x, y] of pts) {
+        const c = document.createElementNS(NS, "circle");
+        c.setAttribute("cx", x);
+        c.setAttribute("cy", y);
+        c.setAttribute("r", (2 + rand() * 4).toFixed(1));
+        c.setAttribute("opacity", (0.2 + rand() * 0.5).toFixed(2));
+        nodes.appendChild(c);
+      }
+      for (let i = 0; i < 34; i++) {
+        const [x1, y1] = pts[Math.floor(rand() * pts.length)];
+        const [x2, y2] = pts[Math.floor(rand() * pts.length)];
+        const p = document.createElementNS(NS, "path");
+        const mx = (x1 + x2) / 2;
+        const my = Math.min(y1, y2) - 80 - rand() * 220;
+        p.setAttribute("d", `M${x1} ${y1} Q${mx} ${my} ${x2} ${y2}`);
+        net.appendChild(p);
+      }
+      // Sparklines without axes or values: shape only.
+      for (const svg of document.querySelectorAll("svg[data-seed]")) {
+        seed = Number(svg.dataset.seed);
+        let y = 50;
+        const points = Array.from({ length: 30 }, (_, i) => {
+          y = Math.max(12, Math.min(80, y + (rand() - 0.5) * 26));
+          return `${(i / 29) * 400},${y.toFixed(1)}`;
+        });
+        const line = document.createElementNS(NS, "polyline");
+        line.setAttribute("points", points.join(" "));
+        line.setAttribute("fill", "none");
+        line.setAttribute("stroke", "#19c9a6");
+        line.setAttribute("stroke-width", "3");
+        svg.appendChild(line);
+      }
+    </script>
+  </body>
+</html>

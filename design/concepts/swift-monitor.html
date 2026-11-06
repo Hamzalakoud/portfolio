@@ -1,0 +1,172 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>SWIFT MT-to-MX — monitoring schematic</title>
+    <link rel="stylesheet" href="board.css" />
+    <style>
+      body {
+        background: radial-gradient(1600px 1000px at 50% 15%, #0f2452, #02050d 75%);
+      }
+      .window {
+        left: 120px;
+        top: 140px;
+        width: 2160px;
+        height: 1250px;
+        padding: 60px 64px;
+        display: grid;
+        grid-template-rows: auto auto 1fr;
+        gap: 48px;
+      }
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: end;
+      }
+      h1 {
+        margin: 0;
+        font-size: 96px;
+        font-variation-settings: "wdth" 75;
+        font-weight: 800;
+        line-height: 0.85;
+        text-transform: uppercase;
+      }
+      header .mono {
+        color: #8ea3c7;
+      }
+      .stages {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 28px;
+      }
+      .stage {
+        padding: 30px 34px;
+        border-radius: 22px;
+        background: rgb(255 255 255 / 0.04);
+        box-shadow: inset 0 0 0 1.5px rgb(255 255 255 / 0.08);
+        display: grid;
+        gap: 22px;
+      }
+      .stage p {
+        margin: 0;
+        display: flex;
+        justify-content: space-between;
+        color: #c9d4e8;
+      }
+      .stage p i {
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        background: #19c9a6;
+        box-shadow: 0 0 18px #19c9a6;
+      }
+      .stage p i.warn {
+        background: #e6c27a;
+        box-shadow: 0 0 18px #e6c27a;
+      }
+      .stage svg {
+        width: 100%;
+        height: 110px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        align-self: start;
+      }
+      th {
+        text-align: left;
+        padding: 0 0 18px;
+        font: 400 20px "Geist Mono", monospace;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: #8ea3c7;
+      }
+      td {
+        padding: 22px 0;
+        border-top: 1.5px solid rgb(255 255 255 / 0.07);
+        font: 400 28px "Geist Mono", monospace;
+        color: #dfe6f2;
+      }
+      .pill {
+        display: inline-block;
+        padding: 8px 20px;
+        border-radius: 99px;
+        font-size: 21px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        background: rgb(25 201 166 / 0.14);
+        color: #5fe6c6;
+      }
+      .pill.run {
+        background: rgb(143 176 255 / 0.14);
+        color: #a9c2ff;
+      }
+      .pill.stop {
+        background: rgb(230 194 122 / 0.16);
+        color: #e6c27a;
+      }
+      .muted {
+        color: #5f7397;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="board">
+      <div class="panel window">
+        <header>
+          <h1>Conversion monitor</h1>
+          <p class="mono">Schematic · generic data</p>
+        </header>
+        <div class="stages mono">
+          <div class="stage"><p>Received <i></i></p><svg viewBox="0 0 400 110" preserveAspectRatio="none" data-seed="4"></svg></div>
+          <div class="stage"><p>Parsed <i></i></p><svg viewBox="0 0 400 110" preserveAspectRatio="none" data-seed="9"></svg></div>
+          <div class="stage"><p>Converted <i></i></p><svg viewBox="0 0 400 110" preserveAspectRatio="none" data-seed="15"></svg></div>
+          <div class="stage"><p>Needs review <i class="warn"></i></p><svg viewBox="0 0 400 110" preserveAspectRatio="none" data-seed="23" data-color="#e6c27a"></svg></div>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Reference</th>
+              <th>Direction</th>
+              <th>Stage</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>REF-0001</td><td class="muted">MT → MX</td><td>Delivered</td><td><span class="pill">Converted</span></td></tr>
+            <tr><td>REF-0002</td><td class="muted">MT → MX</td><td>Converter</td><td><span class="pill run">Running</span></td></tr>
+            <tr><td>REF-0003</td><td class="muted">MT → MX</td><td>Parser</td><td><span class="pill stop">Field to check</span></td></tr>
+            <tr><td>REF-0004</td><td class="muted">MT → MX</td><td>Delivered</td><td><span class="pill">Converted</span></td></tr>
+            <tr><td>REF-0005</td><td class="muted">MT → MX</td><td>Parser</td><td><span class="pill run">Running</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="grain"></div>
+      <p class="tag tag--tl mono"><i></i>SWIFT MT → MX — monitoring schematic</p>
+      <p class="tag tag--tr mono">Generic data · no production system</p>
+    </div>
+    <script>
+      const NS = "http://www.w3.org/2000/svg";
+      for (const svg of document.querySelectorAll("svg[data-seed]")) {
+        let seed = Number(svg.dataset.seed);
+        const rand = () => ((seed = (seed * 16807) % 2147483647) / 2147483647);
+        let y = 60;
+        const pts = Array.from({ length: 34 }, (_, i) => {
+          y = Math.max(14, Math.min(96, y + (rand() - 0.5) * 30));
+          return [(i / 33) * 400, y];
+        });
+        const area = document.createElementNS(NS, "path");
+        area.setAttribute("d", `M0 110 L${pts.map(([x, y]) => `${x} ${y.toFixed(1)}`).join(" L")} L400 110 Z`);
+        area.setAttribute("fill", svg.dataset.color ?? "#19c9a6");
+        area.setAttribute("opacity", ".12");
+        svg.appendChild(area);
+        const line = document.createElementNS(NS, "polyline");
+        line.setAttribute("points", pts.map(([x, y]) => `${x},${y.toFixed(1)}`).join(" "));
+        line.setAttribute("fill", "none");
+        line.setAttribute("stroke", svg.dataset.color ?? "#19c9a6");
+        line.setAttribute("stroke-width", "3");
+        svg.appendChild(line);
+      }
+    </script>
+  </body>
+</html>
