@@ -29,12 +29,13 @@ export default function Experience() {
       scrollTrigger: { trigger: el, start: "top 72%" },
     });
     gsap.from(q(".experience__lede"), { y: 24, autoAlpha: 0, duration: 1, ease: "power3.out", scrollTrigger: { trigger: el, start: "top 66%" } });
-    gsap.from(q(".job"), {
-      yPercent: 30,
+    // The rows' children, not the rows: a row's own opacity belongs to the hover dimming.
+    gsap.from(q(".job__period, .job__main, .job__body"), {
+      y: 40,
       autoAlpha: 0,
       duration: 0.9,
       ease: "power3.out",
-      stagger: 0.06,
+      stagger: 0.03,
       scrollTrigger: { trigger: q(".timeline")[0], start: "top 80%" },
     });
     gsap.fromTo(

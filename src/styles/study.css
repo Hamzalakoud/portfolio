@@ -310,7 +310,7 @@
   height: 7px;
   border-radius: 50%;
   background: var(--accent);
-  box-shadow: 0 0 1rem 0.2rem rgb(255 74 28 / 0.5);
+  box-shadow: 0 0 1rem 0.2rem rgb(255 122 61 / 0.5);
   opacity: 0;
 }
 

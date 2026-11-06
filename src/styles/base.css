@@ -1,11 +1,11 @@
 /* ——— Tokens ——————————————————————————————————————————————— */
 :root {
-  --bg: #080706;
+  --bg: #07080c;
   --ink: #efe9dd;
   --ink-2: rgb(239 233 221 / 0.64);
   --ink-3: rgb(239 233 221 / 0.36);
   --rule: rgb(239 233 221 / 0.16);
-  --accent: #ff4a1c;
+  --accent: #ff7a3d;
 
   --gutter: clamp(1.1rem, 3.2vw, 3.4rem);
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);

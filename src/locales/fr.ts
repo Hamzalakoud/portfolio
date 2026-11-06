@@ -1,7 +1,7 @@
 import type { Dict } from "./types";
 
-/** French: a narrow no-break space before a colon, semicolon, ? and !, and inside « ». */
-const n = " ";
+/** French: a no-break space before a colon, semicolon, ? and !, and inside « ». */
+const n = " ";
 
 /**
  * French copy. Every claim comes from Hamza's French CV (Hamza_Lakoud_CV_FR-3.pdf)
@@ -102,7 +102,7 @@ export const fr: Dict = {
       summary:
         "Une plateforme de tourisme culturel portée par l’IA, conçue pour rendre le patrimoine historique tunisien plus accessible, plus interactif et plus captivant.",
       detail:
-        "zIArat associe la reconnaissance intelligente d’artefacts à une exploration ludique : une expérience numérique qui relie les visiteurs aux sites culturels et historiques, tout en accompagnant la gestion institutionnelle du patrimoine.",
+        "zIArat associe la reconnaissance intelligente d’artefacts à une exploration ludique : une expérience numérique qui relie les visiteurs aux sites culturels et historiques, tout en accompagnant la gestion institutionnelle du patrimoine.",
       flow: ["Reconnaître", "Explorer", "Préserver"],
       scope: ["Reconnaissance IA", "Gamification", "Plateforme patrimoniale"],
       features: [

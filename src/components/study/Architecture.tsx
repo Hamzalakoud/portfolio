@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, type CSSProperties } from "react";
-import type { ArchNode } from "@/content/projects";
+import type { ArchNode } from "@/locales/types";
 import { gsap } from "@/lib/motion";
 import { useScene } from "@/lib/useScene";
 

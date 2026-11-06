@@ -8,7 +8,7 @@
     "build:pages": "node scripts/build-pages.mjs",
     "start": "next start",
     "lint": "eslint src scripts",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "next typegen && tsc --noEmit",
     "qa:shots": "node scripts/shot.mjs"
   },
   "dependencies": {

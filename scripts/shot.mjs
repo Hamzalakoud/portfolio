@@ -1,6 +1,7 @@
 // Viewport QA screenshots. Usage:
 //   node scripts/shot.mjs --url http://localhost:3000 --out .shots/desktop --vw 1440 --vh 900 --scrolls 0,900,1800
-// --scrolls takes pixel offsets, or fractions of the page when suffixed with "p" (e.g. 0.5p).
+// --scrolls takes pixel offsets, or fractions of the page when suffixed with "p" (e.g. 0.5p),
+// or CSS selectors prefixed with "@" (e.g. @#experience+200 scrolls 200px past that element's top).
 import { chromium } from "playwright-core";
 import { mkdir } from "node:fs/promises";
 import path from "node:path";
@@ -47,6 +48,9 @@ page.on("console", (m) => {
   if (m.type() === "error") errors.push(m.text());
 });
 page.on("pageerror", (e) => errors.push(String(e)));
+page.on("response", (r) => {
+  if (r.status() >= 400) errors.push(`${r.status()} ${r.url()}`);
+});
 
 await page.goto(url, { waitUntil: "load" });
 await page.waitForTimeout(settle);
@@ -54,7 +58,14 @@ await page.waitForTimeout(settle);
 const total = await page.evaluate(() => document.documentElement.scrollHeight - window.innerHeight);
 let i = 0;
 for (const s of scrolls) {
-  const y = s.endsWith("p") ? Math.round(parseFloat(s) * total) : Number(s);
+  let y;
+  if (s.startsWith("@")) {
+    const [sel, extra = "0"] = s.slice(1).split("+");
+    y = await page.evaluate(([q, add]) => {
+      const el = document.querySelector(q);
+      return el ? Math.round(el.getBoundingClientRect().top + window.scrollY + Number(add)) : 0;
+    }, [sel, extra]);
+  } else y = s.endsWith("p") ? Math.round(parseFloat(s) * total) : Number(s);
   await page.evaluate((top) => {
     const lenis = window.__lenis;
     if (lenis) lenis.scrollTo(top, { immediate: true, force: true });

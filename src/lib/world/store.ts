@@ -51,7 +51,7 @@ export const world = {
   target: fromState(initial),
   /** Shader time; advances with the state's speed so speed changes never jump. */
   time: 0,
-  /** Audio energy 0..1 from the AURA stage. */
+  /** Audio energy 0..1. Nothing feeds it on this site; the shader still reads it. */
   audio: { bass: 0, high: 0, sBass: 0, sHigh: 0 },
   /** A palette borrowed for a while (project index hover). */
   override: { key: null as string | null, last: null as string | null, mix: 0 },

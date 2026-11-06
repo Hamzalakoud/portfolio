@@ -68,6 +68,8 @@ export default function Hero() {
       );
     }
     tl.to(q(".hero__meta"), { autoAlpha: 0, duration: 0.07 }, 0.02)
+      // Hidden until its letters rise: at its large starting scale, the clip box would show a sliver.
+      .fromTo(build, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.01 }, 0.2)
       .fromTo(q(".hero__build .char"), { yPercent: 112, rotate: 6 }, { yPercent: 0, rotate: 0, duration: 0.17, ease: "power3.out", stagger: 0.012 }, 0.2)
       .fromTo(
         build,
